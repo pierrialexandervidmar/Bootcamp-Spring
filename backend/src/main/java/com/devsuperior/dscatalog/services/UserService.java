@@ -1,10 +1,12 @@
 package com.devsuperior.dscatalog.services;
 
 import com.devsuperior.dscatalog.dto.CategoryDTO;
+import com.devsuperior.dscatalog.dto.RoleDTO;
 import com.devsuperior.dscatalog.dto.UserDTO;
 import com.devsuperior.dscatalog.entities.Category;
 import com.devsuperior.dscatalog.entities.User;
 import com.devsuperior.dscatalog.repositories.CategoryRepository;
+import com.devsuperior.dscatalog.repositories.RoleRepository;
 import com.devsuperior.dscatalog.repositories.UserRepository;
 import com.devsuperior.dscatalog.services.exceptions.DatabaseException;
 import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
@@ -23,6 +25,9 @@ public class UserService {
 
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
 
     @Transactional(readOnly = true)
@@ -76,14 +81,12 @@ public class UserService {
         entity.setLastName(obj.getLastName());
         entity.setEmail(obj.getEmail());
 
-        entity.getCategories().clear();
-        for(CategoryDTO catDto : obj.getCategories()) {
-            Category category = categoryRepository.getOne(catDto.getId());
-            entity.getCategories().add(category);
+        entity.getRoles().clear();
+        for(RoleDTO roleDto : obj.getRoles()) {
+            Role role = roleRepository.getOne(roleDto.getId());
+            entity.getRoles().add(role);
         }
     }
-
-
 }
 
 
