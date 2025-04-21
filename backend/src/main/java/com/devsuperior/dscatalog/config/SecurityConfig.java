@@ -11,7 +11,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         // Desabilita todas as requisições de passarem pela autenticação
-        http.authorizeHttpRequests((authz) -> authz.anyRequest().permitAll());
+        http.headers(headers -> headers
+                .frameOptions(frameOptions -> frameOptions.sameOrigin()) // <-- Permite frames da mesma origem
+            ).authorizeHttpRequests((authz) -> authz.anyRequest().permitAll());
 
         // Desativa a proteção CSRF (Cross-Site Request Forgery), geralmente usado em apps não baseados em navegação web
         http.csrf().disable();
