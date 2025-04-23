@@ -28,6 +28,7 @@ public class UserDTO implements Serializable {
     
     @Email(message = "Favor entrar com um email válido")
     private String email;
+
     Set<RoleDTO> roles = new HashSet<>();
 
     /**

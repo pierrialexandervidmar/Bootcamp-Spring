@@ -61,6 +61,16 @@ public class ResourceExceptionHandler {
         return ResponseEntity.status(status).body(err);
     }
 
+    /**
+     * Manipulador para exceções de validação de argumentos de método.
+     *
+     * <p>Captura erros de validação em requisições e retorna uma lista de campos inválidos,
+     * cada um com sua respectiva mensagem de erro.</p>
+     *
+     * @param e A exceção lançada quando a validação de argumentos falha.
+     * @param request A solicitação HTTP que causou a exceção.
+     * @return Resposta HTTP com detalhes dos erros de validação e status 422 (Entidade Não Processável).
+     */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ValidationError> validation(MethodArgumentNotValidException e, HttpServletRequest request) {
         HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
