@@ -3,6 +3,7 @@ package com.devsuperior.dscatalog.services;
 import java.util.Optional;
 
 import com.devsuperior.dscatalog.dto.UserInsertDTO;
+import com.devsuperior.dscatalog.dto.UserUpdateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -90,7 +91,7 @@ public class UserService {
      * @throws ResourceNotFoundException Se o usuário com o ID fornecido não for encontrado.
      */
     @Transactional
-    public UserDTO update(Long id, UserDTO obj) {
+    public UserDTO update(Long id, UserUpdateDTO obj) {
         try {
             User entity = repository.getReferenceById(id);
             copyDtoToEntity(obj, entity);
